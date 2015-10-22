@@ -1,6 +1,6 @@
 {
 	"name": "lms-laravel/user",
-    "type": "lms-module",
+    "type": "asgard-module",
 	"description": "Module User for LMS Laravel",
   	"license": "MIT",
 	"authors": [

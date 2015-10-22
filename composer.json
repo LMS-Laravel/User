@@ -13,5 +13,11 @@
 		"psr-4": {
 			"Modules\\User\\": ""
 		}
-	}
+	},
+	"repositories": [
+	  {
+		"type": "vcs",
+		"url": "https://github.com/pingpong-labs/modules"
+	  }
+	]
 }

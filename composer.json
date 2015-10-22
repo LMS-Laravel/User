@@ -1,6 +1,8 @@
 {
 	"name": "lms-laravel/user",
-	"description": "",
+    "type": "lms-module",
+	"description": "Module User for LMS Laravel",
+  	"license": "MIT",
 	"authors": [
 		{
 			"name": "Angel Kurten",
@@ -9,7 +11,7 @@
 	],
 	"autoload": {
 		"psr-4": {
-			"Modules\\Auth\\": ""
+			"Modules\\User\\": ""
 		}
 	}
 }

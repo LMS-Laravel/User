@@ -19,5 +19,10 @@
 		"type": "vcs",
 		"url": "https://github.com/pingpong-labs/modules"
 	  }
-	]
+	],
+  	"extra": {
+		"installer-paths": {
+	  	"modules/{$name}": ["User"]
+		}
+  	}
 }

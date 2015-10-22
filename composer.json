@@ -9,6 +9,9 @@
 			"email": "angelkurten@gmail.com"
 		}
 	],
+  	"require": {
+		"composer/installers": "~1.0"
+	}
 	"autoload": {
 		"psr-4": {
 			"Modules\\User\\": ""
@@ -19,10 +22,5 @@
 		"type": "vcs",
 		"url": "https://github.com/pingpong-labs/modules"
 	  }
-	],
-  	"extra": {
-		"installer-paths": {
-	  	"modules/{$name}": ["User"]
-		}
-  	}
+	]
 }

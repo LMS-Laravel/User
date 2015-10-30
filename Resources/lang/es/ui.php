@@ -68,10 +68,26 @@ return [
         'username'              =>  'Usuario',
         'password'              =>  'Contraseña',
         'credentials_error'     =>  'El usuario o la contraseña no son correctos',
-        'btn-login'             =>  'Ingresar a la plataforma',
         'btn-remember'          =>  'Quieres que me acurde de ti?',
-        'btn-lost-password'     =>  'Olvidaste la contraseña?',
         'btn-new-account'       =>  'Crear nueva cuenta',
+    ],
+
+    'register'                  => [
+        'first_name'            => 'Primer Nombre',
+        'last_name'             => 'Primer Apellido',
+        'username'              => 'Usuario(Sin Espacios)',
+        'country'               => 'Elegir Pais',
+        'email'                 => 'Correo electronico',
+        'password'              => 'Contraseña',
+        'vpassword'             => 'Confirmar Contrasseña',
+        'btn-create'            => 'Crear cuenta'
+    ],
+
+    'common'                    => [
+        'message-auth'          =>  '<small>Por favor <strong>Ingresa</strong> o <strong>Registrate</strong></small>',
+        'btn-register-question' =>  'Ya tienes cuenta?',
+        'btn-login'             =>  'Ingresar a la plataforma',
+        'btn-lost-password'     =>  'Olvidaste la contraseña?',
     ],
 
 ];

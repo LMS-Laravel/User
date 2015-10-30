@@ -1,7 +1,9 @@
 <?php namespace Modules\User\Http\Controllers\auth;
 
+use Illuminate\Http\Request;
 use Pingpong\Modules\Routing\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PasswordController extends Controller {
 
@@ -18,13 +20,9 @@ class PasswordController extends Controller {
 
 	public function getEmail()
     {
-		return \Theme::view('auth.reset-password');
+		return \Theme::view('auth.reset');
 	}
 
-	protected function getEmailSubject()
-	{
-		return isset($this->subject) ? $this->subject : 'Your Password Reset Link';
-	}
 
 	public function redirectPath()
 	{
@@ -43,6 +41,5 @@ class PasswordController extends Controller {
 
 		return \Theme::view('auth.reset')->with('token', $token);
 	}
-
 
 }

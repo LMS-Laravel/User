@@ -64,7 +64,6 @@ return [
     'login'                     =>  [
         'signin'                =>  'Iniciar Sesión',
         'rememberme'            =>  'Recuérdame',
-        'email'                 =>  'Correo',
         'username'              =>  'Usuario',
         'password'              =>  'Contraseña',
         'credentials_error'     =>  'El usuario o la contraseña no son correctos',
@@ -77,16 +76,20 @@ return [
         'last_name'             => 'Primer Apellido',
         'username'              => 'Usuario(Sin Espacios)',
         'country'               => 'Elegir Pais',
-        'email'                 => 'Correo electronico',
         'password'              => 'Contraseña',
         'vpassword'             => 'Confirmar Contrasseña',
         'btn-create'            => 'Crear cuenta'
     ],
 
+    'reset'                     => [
+        'btn-reset'             => 'Recuperar Contraseña'
+    ],
+
     'common'                    => [
+        'email'                 => 'Correo electronico',
         'message-auth'          =>  '<small>Por favor <strong>Ingresa</strong> o <strong>Registrate</strong></small>',
         'btn-register-question' =>  'Ya tienes cuenta?',
-        'btn-login'             =>  'Ingresar a la plataforma',
+        'btn-login'             =>  'Ingresa a la plataforma',
         'btn-lost-password'     =>  'Olvidaste la contraseña?',
     ],
 

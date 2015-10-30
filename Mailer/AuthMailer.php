@@ -9,7 +9,7 @@ class AuthMailer extends BaseMail
 
     public function register($user)
     {
-        $subject    = 'Welcome to the site!';
+        $subject    = trans('user::mail.register.welcome', ['name' =>\Config::get('lms.name')]);
         $view       = 'auth.mail.register';
         $data       = [compact('user')];
 

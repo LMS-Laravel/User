@@ -39,7 +39,7 @@ class PasswordController extends Controller {
 			throw new NotFoundHttpException;
 		}
 
-		return \Theme::view('auth.reset')->with('token', $token);
+		return \Theme::view('auth.recover')->with('token', $token);
 	}
 
 }

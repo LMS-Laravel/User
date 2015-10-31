@@ -28,8 +28,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Modules\User\Http\Controllers
 
 });
 
-/*Route::group(['prefix' => 'learning', 'namespace' => 'Modules\User\Http\Controllers\Learning'], function(){
+Route::group(['prefix' => 'learning', 'namespace' => 'Modules\User\Http\Controllers\Learning'], function(){
 
-    Route::resource('user', 'UserController');
+    Route::controller('user', 'UserController');
 
-});*/
+});

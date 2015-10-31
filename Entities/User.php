@@ -11,9 +11,12 @@ use Modules\Course\Entities\Lesson;
 use Modules\Dashboard\Entities\Country;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Carbon\Carbon;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
-class User extends Model implements AuthenticatableContract, CanResetPasswordContract
+class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
 {
+    use SluggableTrait;
     use Authenticatable, CanResetPassword;
     use EntrustUserTrait;
 
@@ -29,8 +32,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'password',
     ];
 
-
     protected $hidden = ['password', 'remember_token'];
+
+    protected $sluggable = [
+        'build_from' => 'username',
+        'save_to'    => 'slug',
+    ];
 
     public function roles() {
 

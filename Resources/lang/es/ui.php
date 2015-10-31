@@ -19,7 +19,7 @@ return [
         'message_update'        =>  'El permiso :name ha sido actualizado satisfactoriamente'
     ],
 
-    'role'                =>  [
+    'role'                      =>  [
         'name'                  =>  'Nombre',
         'names'                 =>  'Roles',
         'display'               =>  'Nombre a mostrar',
@@ -91,6 +91,16 @@ return [
         'btn-register-question' => 'Ya tienes cuenta?',
         'btn-login'             => 'Ingresa a la plataforma',
         'btn-lost-password'     => 'Olvidaste la contraseña?',
+        'country'               => 'Pais',
+        'telephone'            => 'Telefono'
+    ],
+
+    'profile'                   =>[
+        'message-box-status'    => '<h2><strong>Compartir</strong> es vivir..</h2>',
+        'question-box-question' => '¿Que quieres compartir?',
+        'btn-publish'           => 'Publicar',
+        'about'                 => 'Sobre',
+        'points'                => 'Puntos'
     ],
 
 ];

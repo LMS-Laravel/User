@@ -30,7 +30,8 @@ class AuthSetupTables extends Migration
             $table->string('phone_number')->nullable();
             $table->string('username');
             $table->string('password');
-            $table->string('email');
+            $table->string('email')->unique();
+            $table->string('slug')->unique();
             $table->integer('points')->default(0);
             $table->timestamp('last_login')->nullable();
             $table->string('remember_token');

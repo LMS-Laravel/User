@@ -8,7 +8,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Modules\Course\Entities\Lesson;
-use Webpatser\Countries\Countries;
+use Modules\Dashboard\Entities\Country;
 use Zizaco\Entrust\Traits\EntrustUserTrait;
 use Carbon\Carbon;
 
@@ -39,7 +39,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function country(){
 
-        return $this->belongsTo(Countries::class);
+        return $this->belongsTo(Country::class);
     }
 
     public function getFullNameAttribute()

@@ -23,5 +23,12 @@ class UserController extends Controller {
 
 		return theme('user.learning.profile', compact('profile'));
 	}
+
+	public function getPublicProfile($slugOrId)
+	{
+		$profile = $this->user->findBySlugOrIdOrFail($slugOrId);
+
+		return theme('user.public.profile', compact('profile'));
+	}
 	
 }

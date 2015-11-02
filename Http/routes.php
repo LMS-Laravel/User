@@ -28,8 +28,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Modules\User\Http\Controllers
 
 });
 
-Route::group(['prefix' => 'learning', 'namespace' => 'Modules\User\Http\Controllers\Learning'], function(){
+Route::get('/learning/user/public/{id}', [
+        'as' => 'learning.user.profile.public',
+        'uses' => 'Modules\User\Http\Controllers\Learning\UserController@getPublicProfile']
+);
 
-    Route::controller('user', 'UserController');
+Route::group(['prefix' => 'learning', 'namespace' => 'Modules\User\Http\Controllers\Learning', 'middleware' => 'auth'], function(){
+
+    Route::controller('user', 'UserController',[
+        'getProfile' => 'learning.user.profile',
+    ]);
 
 });
+

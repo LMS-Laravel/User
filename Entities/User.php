@@ -16,10 +16,7 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
 {
-    use SluggableTrait;
-    use Authenticatable, CanResetPassword;
-    use EntrustUserTrait;
-
+    use SluggableTrait, Authenticatable, CanResetPassword, EntrustUserTrait;
     
     protected $table = 'users';
 

@@ -1,11 +1,13 @@
 <?php namespace Modules\User\Http\Controllers\Auth;
 
+use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Modules\Dashboard\Repositories\CountryRepository;
 use Modules\User\Entities\User;
 use Modules\User\Mailer\AuthMailer;
+use Modules\User\Repositories\UserRepository;
 use Pingpong\Modules\Routing\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -16,12 +18,17 @@ class AuthController extends Controller {
     protected $loginPath;
     protected $redirectPath;
     protected $redirectTo;
+    /**
+     * @var UserRepository
+     */
+    private $user;
 
-    public function __construct() {
+    public function __construct(UserRepository $user) {
         $this->redirectPath = route('dashboard.learning');
         $this->redirectTo = $this->redirectPath;
         $this->loginPath = route('auth.loginGet');
         $this->middleware('guest', ['except' => 'getLogout']);
+        $this->user = $user;
     }
 
     public function index() {
@@ -32,18 +39,18 @@ class AuthController extends Controller {
     protected function validator(array $data)
     {
         return \Validator::make($data, [
-            'username'  => 'required|max:255|unique:users',
+            'username'    => 'required|max:255|unique:users',
             'first_name'  => 'required|max:255',
-            'last_name'  => 'required|max:255',
-            'country_id' => 'required|exists:countries,id',
-            'email'     => 'required|email|max:255|unique:users',
-            'password'  => 'required|confirmed|min:6',
+            'last_name'   => 'required|max:255',
+            'country_id'  => 'required|exists:countries,id',
+            'email'       => 'required|email|max:255|unique:users',
+            'password'    => 'required|confirmed|min:6',
         ]);
     }
 
-    protected function create(array $data)
+    protected function createUser(array $data)
     {
-        return User::create([
+        return $this->user->create([
             'username'  => $data['username'],
             'email'     => $data['email'],
             'first_name'=> $data['first_name'],
@@ -61,19 +68,36 @@ class AuthController extends Controller {
 
     public function postRegister(Request $request, AuthMailer $mailer)
     {
+
+        // Start transaction!
+        \DB::beginTransaction();
+
         $validator = $this->validator($request->all());
 
         if ($validator->fails()) {
             $this->throwValidationException(
                 $request, $validator
             );
+            \DB::rollback();
         }
 
-        Auth::login($this->create($request->all()));
+        try{
+            $user = $this->createUser($request->all());
+            $user->roles()->attach(3);
+            $mailer->register($user);
 
-        $mailer->register(Auth::user());
+            \DB::commit();
+            \Auth::login($user);
 
-        return redirect($this->redirectPath());
+            return redirect($this->redirectPath());
+
+        } catch (ValidationException $e){
+
+            \DB::rollback();
+            return redirect($this->redirectPath())
+                ->withErrors( $e->errors() )
+                ->withInput();
+        }
     }
 
 

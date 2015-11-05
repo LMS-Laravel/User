@@ -37,21 +37,21 @@ return [
     ],
 
     'user'                      =>  [
-        'name'                  =>  'Nombre',
-        'names'                 =>  'Usuarios',
         'firstname'             =>  'Nombre',
-        'lastname'              =>  'Apellidos',
+        'lastname'              =>  'Apellido',
         'username'              =>  'Nombre de Usuario',
         'email'                 =>  'Correo',
+        'country'               =>  'Pais',
+        'telephone'             =>  'Telefono',
         'password'              =>  'Contraseña',
         'password_confirmation' =>  'Confirmar Contraseña',
-        'password_new'              =>  'Contraseña Nueva',
-        'password_old'              =>  'Contraseña Anterior',
+        'password_new'          =>  'Contraseña Nueva',
+        'password_old'          =>  'Contraseña Anterior',
         'name_label'            =>  'Usuario',
-        'change_password'            =>  'Cambiar Contraseña',
+        'change_password'       =>  'Cambiar Contraseña',
         'operation_label'       =>  'Operaciones',
-        'new_user'           =>  'Nuevo Usuario',
-        'edit_user'          =>  'Editar Usuario',
+        'new_user'              =>  'Nuevo Usuario',
+        'edit_user'             =>  'Editar Usuario',
         'button_update'         =>  'Actualizar',
         'button_delete'         =>  'Eliminar',
         'button_add'            =>  'Agregar',
@@ -102,5 +102,12 @@ return [
         'about'                 => 'Sobre',
         'points'                => 'Puntos'
     ],
+
+    'widget'                    =>[
+        'update-user'           => [
+            'title'             => 'Actualizar Perfil',
+            'btn-save'          => 'Guardar datos'
+        ]
+    ]
 
 ];

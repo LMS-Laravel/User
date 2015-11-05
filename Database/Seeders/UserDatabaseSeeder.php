@@ -181,6 +181,22 @@ class UserDatabaseSeeder extends Seeder {
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ));
+
+        DB::table('roles')->insert(array(
+            'name' => 'teacher',
+            'display_name' => 'Teacher',
+            'description' => 'Teacher',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ));
+
+        DB::table('roles')->insert(array(
+            'name' => 'student',
+            'display_name' => 'Student',
+            'description' => 'Student',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ));
 	}
 
     private function addPermissionRoleSeeder(){

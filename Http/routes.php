@@ -36,8 +36,9 @@ Route::get('/learning/user/public/{id}', [
 Route::group(['prefix' => 'learning', 'namespace' => 'Modules\User\Http\Controllers\Learning', 'middleware' => 'auth'], function(){
 
     Route::controller('user', 'UserController',[
-        'getProfile' => 'learning.user.profile',
-        'putProfile' => 'learning.user.update.profile'
+        'getProfile'        => 'learning.user.profile',
+        'putProfile'        => 'learning.user.update.profile',
+        'getRanking'        => 'learning.user.ranking.global',
     ]);
 
 });

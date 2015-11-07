@@ -2,6 +2,7 @@
 
 use Modules\Dashboard\Repositories\CountryRepository;
 use Modules\User\Http\Requests\Learning\UpdateProfileRequest;
+use Modules\User\Repositories\Criterias\OrderBy;
 use Modules\User\Repositories\UserRepository;
 use Pingpong\Modules\Routing\Controller;
 use Modules\User\Polices\Learning\UserPolice;
@@ -57,5 +58,19 @@ class UserController extends Controller {
 		$user->update($request->all());
 
 		return redirect(route('learning.user.profile', $user->slug));
+	}
+
+	public function getRanking($by = false)
+	{
+		$this->user->pushCriteria(new OrderBy('points'));
+		if(!$by)
+		{
+			$users = $this->user->all()->take(32);
+			$title = 'Ranking Global';
+		} else {
+			$users = $this->user->findWhere(['country_id' => $by]);
+			$title = 'Ranking por Pais';
+		}
+		return theme('user.learning.ranking', compact('users', 'title'));
 	}
 }

@@ -38,7 +38,7 @@ Route::group(['prefix' => 'learning', 'namespace' => 'Modules\User\Http\Controll
     Route::controller('user', 'UserController',[
         'getProfile'        => 'learning.user.profile',
         'putProfile'        => 'learning.user.update.profile',
-        'getRanking'        => 'learning.user.ranking.global',
+        'getRanking'        => 'learning.user.ranking',
     ]);
 
 });

@@ -95,7 +95,7 @@ return [
         'telephone'            => 'Telefono'
     ],
 
-    'profile'                   =>[
+    'profile'                   => [
         'message-box-status'    => '<h2><strong>Compartir</strong> es vivir..</h2>',
         'question-box-question' => '¿Que quieres compartir?',
         'btn-publish'           => 'Publicar',
@@ -103,11 +103,17 @@ return [
         'points'                => 'Puntos'
     ],
 
-    'widget'                    =>[
+    'widget'                    => [
         'update-user'           => [
             'title'             => 'Actualizar Perfil',
             'btn-save'          => 'Guardar datos'
         ]
+    ],
+
+    'ranking'                   => [
+        'global'                => 'Ranking Global',
+        'country'               => 'Ranking de :country',
+        'description'           => 'Solo los mejores estan aqui'
     ]
 
 ];

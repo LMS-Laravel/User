@@ -60,16 +60,17 @@ class UserController extends Controller {
 		return redirect(route('learning.user.profile', $user->slug));
 	}
 
-	public function getRanking($by = false)
+	public function getRanking($iso = false)
 	{
 		$this->user->pushCriteria(new OrderBy('points'));
-		if(!$by)
+		if(!$iso)
 		{
 			$users = $this->user->all()->take(32);
-			$title = 'Ranking Global';
+			$title = trans('user::ui.ranking.global');
 		} else {
-			$users = $this->user->findWhere(['country_id' => $by]);
-			$title = 'Ranking por Pais';
+			$country = $this->country->findByField('iso2', $iso)->first();
+			$users = $this->user->findWhere(['country_id' => $country->id]);
+			$title = trans('user::ui.ranking.country', ['country'=>$country->short_name]);
 		}
 		return theme('user.learning.ranking', compact('users', 'title'));
 	}

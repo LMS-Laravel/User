@@ -1,7 +1,6 @@
 <?php
 
-namespace Modules\User\Repositories\Criterias;
-
+namespace modules\User\Repositories\Criterias;
 
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
@@ -19,7 +18,6 @@ class OrderBy implements CriteriaInterface
 
     public function __construct($by, $order = 'DESC')
     {
-
         $this->by = $by;
         $this->order = $order;
     }
@@ -27,7 +25,7 @@ class OrderBy implements CriteriaInterface
     public function apply($model, RepositoryInterface $repository)
     {
         $model = $model->orderBy($this->by, $this->order);
+
         return $model;
     }
-
 }

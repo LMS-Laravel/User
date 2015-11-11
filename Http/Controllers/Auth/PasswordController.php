@@ -1,45 +1,43 @@
-<?php namespace Modules\User\Http\Controllers\auth;
+<?php
 
-use Illuminate\Http\Request;
+namespace modules\User\Http\Controllers\Auth;
+
 use Pingpong\Modules\Routing\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class PasswordController extends Controller {
+class PasswordController extends Controller
+{
+    use ResetsPasswords;
 
-	use ResetsPasswords;
-
-
-	/**
-	 * PasswordController constructor.
-	 */
-	public function __construct()
-	{
-		$this->middleware('guest');
-	}
-
-	public function getEmail()
+    /**
+     * PasswordController constructor.
+     */
+    public function __construct()
     {
-		return \Theme::view('auth.reset');
-	}
+        $this->middleware('guest');
+    }
 
+    public function getEmail()
+    {
+        return \Theme::view('auth.reset');
+    }
 
-	public function redirectPath()
-	{
-		if (property_exists($this, 'redirectPath')) {
-			return $this->redirectPath;
-		}
+    public function redirectPath()
+    {
+        if (property_exists($this, 'redirectPath')) {
+            return $this->redirectPath;
+        }
 
-		return property_exists($this, 'redirectTo') ? $this->redirectTo : '/learning';
-	}
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/learning';
+    }
 
-	public function getReset($token = null)
-	{
-		if (is_null($token)) {
-			throw new NotFoundHttpException;
-		}
+    public function getReset($token = null)
+    {
+        if (is_null($token)) {
+            throw new NotFoundHttpException();
+        }
 
-		return \Theme::view('auth.recover')->with('token', $token);
-	}
-
+        return \Theme::view('auth.recover')->with('token', $token);
+    }
 }

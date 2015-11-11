@@ -1,31 +1,31 @@
-<?php namespace Modules\User\Database\Seeders;
+<?php
+
+namespace modules\User\Database\Seeders;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 
-class UserDatabaseSeeder extends Seeder {
-
-	/**
-	 * Run the database seeds.
-	 *
-	 * @return void
-	 */
-	public function run()
-	{
-		$this->permissionsUserSeeder();
+class UserDatabaseSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     */
+    public function run()
+    {
+        $this->permissionsUserSeeder();
         $this->permissionsRoleSeeder();
         $this->permissionsSeeder();
         $this->permissionsAllSeeder();
         $this->rolesSeeder();
         $this->addPermissionRoleSeeder();
-		$this->usersSeeder();
-		$this->roleUserSeeder();
-	}
+        $this->usersSeeder();
+        $this->roleUserSeeder();
+    }
 
-	private function permissionsUserSeeder(){
-
-		DB::table('permissions')->insert(array(
+    private function permissionsUserSeeder()
+    {
+        DB::table('permissions')->insert(array(
             'name' => 'create-users',
             'display_name' => 'Create Users',
             'description' => 'Create users',
@@ -33,7 +33,7 @@ class UserDatabaseSeeder extends Seeder {
             'updated_at' => Carbon::now(),
         ));
 
-		DB::table('permissions')->insert(array(
+        DB::table('permissions')->insert(array(
             'name' => 'read-users',
             'display_name' => 'Read Users',
             'description' => 'List Users',
@@ -56,10 +56,10 @@ class UserDatabaseSeeder extends Seeder {
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ));
-	}
+    }
 
-    private function permissionsRoleSeeder(){
-
+    private function permissionsRoleSeeder()
+    {
         DB::table('permissions')->insert(array(
             'name' => 'create-roles',
             'display_name' => 'Create Roles',
@@ -93,8 +93,8 @@ class UserDatabaseSeeder extends Seeder {
         ));
     }
 
-    private function permissionsSeeder(){
-
+    private function permissionsSeeder()
+    {
         DB::table('permissions')->insert(array(
             'name' => 'create-permissions',
             'display_name' => 'Create Permissions',
@@ -128,14 +128,13 @@ class UserDatabaseSeeder extends Seeder {
         ));
     }
 
-    private function permissionsAllSeeder(){
-
+    private function permissionsAllSeeder()
+    {
         $name = 'Tables_in_'.env('DB_DATABASE', 'forge');
         $data = DB::select('SHOW TABLES WHERE '.$name.' NOT REGEXP "[[.low-line.]]"');
 
-        foreach($data as $value) {
-
-            if(($value->$name != 'users') && ($value->$name != 'migrations') &&
+        foreach ($data as $value) {
+            if (($value->$name != 'users') && ($value->$name != 'migrations') &&
                 ($value->$name != 'roles') && ($value->$name != 'permissions')) {
                 DB::table('permissions')->insert(array(
                     'name' => 'create-'.$value->$name,
@@ -172,9 +171,9 @@ class UserDatabaseSeeder extends Seeder {
         }
     }
 
-	private function rolesSeeder(){
-
-		DB::table('roles')->insert(array(
+    private function rolesSeeder()
+    {
+        DB::table('roles')->insert(array(
             'name' => 'admin',
             'display_name' => 'Administrador',
             'description' => 'Administra los módulos de usuarios',
@@ -197,21 +196,21 @@ class UserDatabaseSeeder extends Seeder {
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ));
-	}
+    }
 
-    private function addPermissionRoleSeeder(){
-
-        for($i=1; $i < 13; $i++){
+    private function addPermissionRoleSeeder()
+    {
+        for ($i = 1; $i < 13; ++$i) {
             DB::table('permission_role')->insert(array(
                 'permission_id' => $i,
-                'role_id' => 1
+                'role_id' => 1,
             ));
         }
     }
 
-	private function usersSeeder(){
-
-		DB::table('users')->insert(array(
+    private function usersSeeder()
+    {
+        DB::table('users')->insert(array(
             'first_name' => 'John',
             'last_name' => 'Doe',
             'username' => 'admin',
@@ -221,14 +220,13 @@ class UserDatabaseSeeder extends Seeder {
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ));
-        	}
-
-    private function roleUserSeeder(){
-
-            DB::table('role_user')->insert(array(
-                'user_id' => 1,
-                'role_id' => 1
-            ));
     }
 
+    private function roleUserSeeder()
+    {
+        DB::table('role_user')->insert(array(
+            'user_id' => 1,
+            'role_id' => 1,
+        ));
+    }
 }

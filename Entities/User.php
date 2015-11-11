@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\User\Entities;
+namespace modules\User\Entities;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +17,7 @@ use Cviebrock\EloquentSluggable\SluggableTrait;
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract, SluggableInterface
 {
     use SluggableTrait, Authenticatable, CanResetPassword, EntrustUserTrait;
-    
+
     protected $table = 'users';
 
     protected $fillable = [
@@ -27,35 +27,33 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         'email',
         'country_id',
         'password',
-        'phone_number'
+        'phone_number',
     ];
 
     protected $hidden = ['password', 'remember_token'];
 
     protected $sluggable = [
         'build_from' => 'username',
-        'save_to'    => 'slug',
+        'save_to' => 'slug',
     ];
 
-    public function roles() {
-
+    public function roles()
+    {
         return $this->belongsToMany('Modules\User\Entities\Role', 'role_user');
     }
 
-    public function country(){
-
+    public function country()
+    {
         return $this->belongsTo(Country::class);
     }
 
     public function getFullNameAttribute()
     {
-
-        return $this->first_name .' '. $this->last_name;
+        return $this->first_name.' '.$this->last_name;
     }
 
     public function getCreatedAtAttribute($attr)
     {
-
         return Carbon::parse($attr)->toFormattedDateString(); //Change the format to whichever you desire
     }
 

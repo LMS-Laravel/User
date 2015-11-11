@@ -1,4 +1,6 @@
-<?php namespace Modules\User\Http\Controllers\Auth;
+<?php
+
+namespace modules\User\Http\Controllers\Auth;
 
 use Illuminate\Contracts\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
@@ -11,8 +13,8 @@ use Modules\User\Repositories\UserRepository;
 use Pingpong\Modules\Routing\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
-class AuthController extends Controller {
-
+class AuthController extends Controller
+{
     use AuthenticatesAndRegistersUsers;
 
     protected $loginPath;
@@ -23,7 +25,8 @@ class AuthController extends Controller {
      */
     private $user;
 
-    public function __construct(UserRepository $user) {
+    public function __construct(UserRepository $user)
+    {
         $this->redirectPath = route('dashboard.learning');
         $this->redirectTo = $this->redirectPath;
         $this->loginPath = route('auth.loginGet');
@@ -31,38 +34,39 @@ class AuthController extends Controller {
         $this->user = $user;
     }
 
-    public function index() {
-
+    public function index()
+    {
         return \Theme::view('auth.login');
     }
 
     protected function validator(array $data)
     {
         return \Validator::make($data, [
-            'username'    => 'required|max:255|unique:users',
-            'first_name'  => 'required|max:255',
-            'last_name'   => 'required|max:255',
-            'country_id'  => 'required|exists:countries,id',
-            'email'       => 'required|email|max:255|unique:users',
-            'password'    => 'required|confirmed|min:6',
+            'username' => 'required|max:255|unique:users',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'country_id' => 'required|exists:countries,id',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
         ]);
     }
 
     protected function createUser(array $data)
     {
         return $this->user->create([
-            'username'  => $data['username'],
-            'email'     => $data['email'],
-            'first_name'=> $data['first_name'],
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'country_id' => $data['country_id'],
-            'password'  => bcrypt($data['password']),
+            'password' => bcrypt($data['password']),
         ]);
     }
 
     public function getRegister(CountryRepository $country)
     {
         $countries = $country->all(['id', 'short_name']);
+
         return \Theme::view('auth.register', compact('countries'));
     }
 
@@ -81,7 +85,7 @@ class AuthController extends Controller {
             \DB::rollback();
         }
 
-        try{
+        try {
             $user = $this->createUser($request->all());
             $user->roles()->attach(3);
             $mailer->register($user);
@@ -90,19 +94,17 @@ class AuthController extends Controller {
             \Auth::login($user);
 
             return redirect($this->redirectPath());
-
-        } catch (ValidationException $e){
-
+        } catch (ValidationException $e) {
             \DB::rollback();
+
             return redirect($this->redirectPath())
-                ->withErrors( $e->errors() )
+                ->withErrors($e->errors())
                 ->withInput();
         }
     }
 
-
-    public function postLogin(Request $request) {
-
+    public function postLogin(Request $request)
+    {
         $this->validate($request, [
             Config::get('auth.login') => 'required', 'password' => 'required',
         ]);
@@ -120,25 +122,25 @@ class AuthController extends Controller {
             ]);
     }
 
-    public function getLogout() {
-
+    public function getLogout()
+    {
         Auth::logout();
 
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
 
-    public function loginPath() {
-
+    public function loginPath()
+    {
         return property_exists($this, 'loginPath') ? $this->loginPath : '/auth/login';
     }
 
-    public function getCredentials(Request $request) {
-
+    public function getCredentials(Request $request)
+    {
         return $request->only(Config::get('auth.login'), 'password');
     }
 
-    public function redirectPath() {
-
+    public function redirectPath()
+    {
         if (property_exists($this, 'redirectPath')) {
             return $this->redirectPath;
         }
@@ -146,9 +148,8 @@ class AuthController extends Controller {
         return property_exists($this, 'redirectTo') ? $this->redirectTo : '/learning';
     }
 
-    public function getFailedLoginMessage() {
-
+    public function getFailedLoginMessage()
+    {
         return trans('user::ui.login.credentials_error', array('field' => Config::get('auth.login')));
     }
-
 }

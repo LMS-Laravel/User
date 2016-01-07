@@ -1,9 +1,10 @@
 <?php
 
-namespace modules\User\Repositories;
+namespace Modules\User\Repositories;
 
 use App\BaseRepository;
 use Modules\User\Entities\User;
+
 
 class UserRepository extends BaseRepository
 {
@@ -11,4 +12,5 @@ class UserRepository extends BaseRepository
     {
         return User::class;
     }
+
 }

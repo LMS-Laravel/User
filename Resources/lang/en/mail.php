@@ -2,7 +2,7 @@
 
 return [
         'register'          =>[
-            'welcome'       => 'Bienvenido a :name',
+            'welcome'       => 'Welcome to :name',
             'message'       => 'Gracias por unirte a :name, es un placer tenerte con nosotros',
             'btn-started'   => 'Ir a la plataforma'
         ],
